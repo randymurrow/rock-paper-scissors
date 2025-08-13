@@ -28,7 +28,7 @@ function playRound(humanChoice, computerChoice) {
     // Make choices case-insensitive
     humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.substring(1).toLowerCase();
     
-    // Log result of game to console
+    // Log result of game to console & increment score
     if (humanChoice === computerChoice) {
         console.log("Tie!");
     } else if (
