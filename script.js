@@ -1,6 +1,7 @@
 // GET random choice of "rock," "paper," or "scissors"
 function getComputerChoice() {
     let computerChoice;
+    // GET random number between 1 and 3
     let num = Math.floor(Math.random() * 3) + 1;
     if (num === 1) {
         computerChoice = "Rock";
@@ -70,16 +71,36 @@ function playRound(humanChoice, computerChoice) {
     }
     // Increment winner's score
     if (outcome == "You win!") {
-        humanScore += 1;
+        ++humanScore;
     } else if (outcome == "You lose!") {
-        computerScore += 1;
+        ++computerScore;
     }
 
     console.log("Human: " + humanScore);
     console.log("Computer: " + computerScore);
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+//Play a game of five rounds
+function playGame() {
+    
+    //Iterate over the playRound function five times
+    for (let i = 0; i < 5; i++) {
+        let humanChoice = getHumanChoice();
+        let computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+    }
 
-playRound(humanSelection, computerSelection);
+    //Declare winner at the end
+    let winner;
+    if (humanScore > computerScore) {
+        winner = "You win the game!";
+    } else if (computerScore > humanScore) {
+        winner = "Computer wins the game!";
+    } else {
+        winner = "Overall tie!";
+    }
+    console.log(winner);
+
+}
+
+playGame()
