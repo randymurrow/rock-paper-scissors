@@ -17,6 +17,11 @@ function getComputerChoice() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("newGame").style.display = "none";
+    document.querySelector("#humanScore").textContent = `You: ${humanScore}`;
+    document.querySelector("#computerScore").textContent = `Computer: ${computerScore}`;
+
+
     let choices = document.querySelectorAll(".choice");
     choices.forEach(button => {
         button.addEventListener("click", () => {
@@ -50,14 +55,36 @@ function playRound(humanChoice, computerChoice, round) {
         roundOutcome = `You lose! ${computerChoice} beats ${humanChoice}`;
     }
 
-    if (humanScore === 5) {
-        gameOutcome = "You win the game!";
-    } else if (computerScore === 5) {
-        gameOutcome = "Computer wins the game!";
+    if (humanScore ===5 || computerScore === 5) {
+        if (humanScore === 5) {
+            gameOutcome = "You win the game!";
+        } else if (computerScore === 5) {
+            gameOutcome = "Computer wins the game!";
+        }
+        document.getElementById("newGame").style.display = "block";
+        document.getElementById("newGame").addEventListener("click", () => {
+            reset();
+            });
     }
 
     document.querySelector("#roundOutcome").textContent = roundOutcome;
-    document.querySelector("#humanScore").textContent = `Your Score: ${humanScore}`;
-    document.querySelector("#computerScore").textContent = `Computer Score: ${computerScore}`;
+    document.querySelector("#humanScore").textContent = `You: ${humanScore}`;
+    document.querySelector("#computerScore").textContent = `Computer: ${computerScore}`;
     document.querySelector("#gameOutcome").textContent = gameOutcome;
+
+
+}
+
+function reset() {
+    humanScore = 0;
+    computerScore = 0;
+    round = 0;
+    gameOutcome = "";
+
+    document.querySelector("#roundCount").textContent = "Ready to play!";
+    document.querySelector("#roundOutcome").textContent = "";
+    document.querySelector("#humanScore").textContent = `You: ${humanScore}`;
+    document.querySelector("#computerScore").textContent = `Computer: ${computerScore}`;
+    document.querySelector("#gameOutcome").textContent = gameOutcome;
+    document.getElementById("newGame").style.display = "none";
 }
